@@ -10,7 +10,6 @@
 			dependencyNames: ['dependency1', 'dependency2'],
 			cachedLibrary: '';
 		}
-
 	*/
 	var libraryStorage = {};
 
