@@ -16,20 +16,20 @@
 	// librarySystem can be used to either Create or Use a library.
 	function librarySystem(libraryName, dependencyNames, callback) {
 
-    // 1. Create mode (store a new library)
+		// 1. Create mode (store a new library)
 		if (arguments.length === 3) {
 
-			/**
-			Save an object that will eventually store the library.
-				The callback will eventually return the library, but we only do this in
-				'Use mode'. This lazy loading technique allows us to create libraries
-				out of order.
-			*/
-      libraryStorage[libraryName] = {
-        callback: callback,
-        dependencyNames: dependencyNames,
-        cachedLibrary: ''
-      };
+	/**
+	Save an object that will eventually store the library.
+		The callback will eventually return the library, but we only do this in
+		'Use mode'. This lazy loading technique allows us to create libraries
+		out of order.
+	*/
+	libraryStorage[libraryName] = {
+		callback: callback,
+		dependencyNames: dependencyNames,
+		cachedLibrary: ''
+	};
 
 	//  2. Use mode (Use an already store library, with dependencies resolved)
 	} else if (arguments.length === 1) {
