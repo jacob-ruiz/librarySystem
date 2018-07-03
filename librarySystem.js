@@ -10,14 +10,13 @@
 			dependencyNames: ['dependency1', 'dependency2'],
 			cachedLibrary: '';
 		}
-
 	*/
 	var libraryStorage = {};
 
 	// librarySystem can be used to either Create or Use a library.
 	function librarySystem(libraryName, dependencyNames, callback) {
 
-    // 1. Create mode (store a new library)
+		// 1. Create mode (store a new library)
 		if (arguments.length === 3) {
 			/**
 			Save an object that will eventually store the library.
