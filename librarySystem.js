@@ -19,7 +19,6 @@
 
     // 1. Create mode (store a new library)
 		if (arguments.length === 3) {
-
 			/**
 			Save an object that will eventually store the library.
 				The callback will eventually return the library, but we only do this in
@@ -36,7 +35,9 @@
 	} else if (arguments.length === 1) {
       var libObject = libraryStorage[libraryName];
 			var depNames = libObject.dependencyNames;
-
+				/// Chef i no cached
+				// f     ill cached
+				// always return cache
       // Check if the library has already been cached.
       if (libObject.cachedLibrary) {
         // If so, just return it.
@@ -51,6 +52,7 @@
         // Cache the library
         libObject.cachedLibrary = libObject.callback(...resolvedDependencies);
         // Return the cached library so it can be used
+
         return libObject.cachedLibrary;
       }
 		// If the wrong number of arguments are present, throw an error.
