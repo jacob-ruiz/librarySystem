@@ -4,60 +4,61 @@
 /**
 librarySystem is a function that can be used in two ways:
 
-	1. Create mode -- To store a new library:
+  1. Create mode -- To store a new library:
 
-		Pass in three arguments:
+    Pass in three arguments:
 
-			libraryName
-				- A string representing the name of the library.
+      libraryName
+        - A string representing the name of the library.
 
-			dependencyNames
-				- An array containing the names of dependencies (as strings).
+      dependencyNames
+        - An array containing the names of dependencies (as strings).
 
-			callback
-				- A function that returns the library being stored.
+      callback
+        - A function that returns the library being stored.
 
-			Example:
-			librarySystem('workBlurb', ['name', 'job'], function(name, job) {
-			  return name + ' works as a ' + job;
-			});
+      Example:
+        librarySystem('workBlurb', ['name', 'job'], function(name, job) {
+          return name + ' works as a ' + job;
+        });
 
-			librarySystem('name', [], function() {
-			  return 'Jacob';
-			});
+        librarySystem('name', [], function() {
+          return 'Jacob';
+        });
 
-			librarySystem('job', [], function() {
-			  return 'Freelance UI/UX Designer';
-			});
+        librarySystem('job', [], function() {
+          return 'Freelance UI/UX Designer';
+        });
 
-			What to expect:
-			librarySystem will then store your library so it can be
-			returned in the "Use case".
+      What to expect:
+        librarySystem will then store your library so it can be
+        returned in the "Use case".
 
-	2. Use mode -- To use an already stored library.
+  2. Use mode -- To use an already stored library.
 
-		Pass in one argument:
-			libraryName
-				- A string representing the name of the library.
+    Pass in one argument:
 
-			Example:
-			librarySystem('workBlurb');  ==> 'Jacob works as a Freelance UI/UX Designer'
+      libraryName
+        - A string representing the name of the library.
 
-			What to expect:
-			librarySystem will return the library with any dependencies resolved.
+      Example:
+        librarySystem('workBlurb');  ==> 'Jacob works as a Freelance UI/UX Designer'
+        
+      What to expect:
+        librarySystem will return the library with any dependencies resolved.
 */
 
 tests({
 
- 'it should create a library without dependencies': function() {
-   librarySystem('food', [], function() {
-     return 'burritos';
-   })
-   var result = librarySystem('food');
-   eq(result, 'burritos');
- },
+  'it should create a library without dependencies': function() {
+    librarySystem('food', [], function() {
+      return 'burritos';
+    });
+    var result = librarySystem('food');
+    eq(result, 'burritos');
+  },
 
- 'it should create a library with dependencies': function() {
+  'it should create a library with dependencies': function() {
     librarySystem('food', [], function() {
       return 'burritos';
     });
@@ -72,8 +73,9 @@ tests({
 
     var result = librarySystem('hobbyBlurb');
     eq(result, 'I like to eat burritos and drink tea');
- },
- 'it should create a library with dependencies out of order': function() {
+  },
+
+  'it should create a library with dependencies out of order': function() {
     librarySystem('workBlurb', ['name', 'company'], function(name, company) {
       return name + ' works at ' + company;
     });
@@ -88,28 +90,30 @@ tests({
 
     var result = librarySystem('workBlurb');
     eq(result, 'Gordon works at Watch and Code');
- },
- 'it should only run the callback function for each library one time.': function() {
-   var numberOfTimesCallbackHasRun = 0;
+  },
 
-   librarySystem('weather', [], function() {
-     numberOfTimesCallbackHasRun++
-     return 'sunshine';
-   });
+  'it should only run the callback function for each library one time.': function() {
+    var numberOfTimesCallbackHasRun = 0;
 
-   librarySystem('weather');
-   librarySystem('weather');
+    librarySystem('weather', [], function() {
+      numberOfTimesCallbackHasRun++
+      return 'sunshine';
+    });
 
-   eq(numberOfTimesCallbackHasRun, 1)
- },
- 'it should throw a TypeError if called with the wrong number of arguments': function() {
-	 var isTypeError = false;
-	 try {
-			 librarySystem('earth', ['moon', 'sun']);
-	 } catch(e) {
-			 var isTypeError = (e instanceof TypeError);
-	 }
-	 eq(isTypeError, true);
- },
+    librarySystem('weather');
+    librarySystem('weather');
+
+    eq(numberOfTimesCallbackHasRun, 1)
+  },
+
+  'it should throw a TypeError if called with the wrong number of arguments': function() {
+    var isTypeError = false;
+    try {
+      librarySystem('earth', ['moon', 'sun']);
+    } catch(e) {
+      var isTypeError = (e instanceof TypeError);
+    }
+    eq(isTypeError, true);
+  },
 });
 </script>
